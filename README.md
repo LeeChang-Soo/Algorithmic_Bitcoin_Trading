@@ -95,7 +95,7 @@ As you can see by the somewhat parallel lines below, there appears to be a stron
 
 <p align="center">
 <img src="https://cloud.githubusercontent.com/assets/16638757/25632088/3a4f0280-2f27-11e7-9e99-4bad2c1ef7a0.png"
-width="760">
+width="630">
 </p>
 
 The correlation between the number of page views for the “Bitcoin” Wikipedia page and the Bitcoin price is significantly weaker. 
@@ -104,7 +104,7 @@ The correlation between the number of page views for the “Bitcoin” Wikipedia
 
 <p align="center">
 <img src="https://cloud.githubusercontent.com/assets/16638757/25632244/be7434fe-2f27-11e7-8058-1ec5dbe860d4.png" 
-width="760">
+width="630">
 </p>
 
 In the end, adding the Wikipedia page view trend to the feature set did not produce more accurate predictions.
@@ -251,8 +251,20 @@ width="760">
 
 ## Conclusions and Next Steps
 
-Because this project pushed me out of my comfort zone into the world of time series forecasting and algorithmic trading, I found it both challenging and rewarding. Indeed, I enjoyed the project so much that I plan on continuing to develop my algorithm and trading strategies in my free time. To this end, I will add XGBoost and LSTM to see if either approach improves the accuracy of the Bitcoin price predictions. I will also continue to tune Prophet models to improve the accuracy of both short-term and long-term forecasts. After that, my goal is to plug in my algorithm to a sandbox account on an existing exchange (e.g., GDAX) to trade at a higher frequency using live-streaming order-book data.
+Because this project pushed me out of my comfort zone into the world of time series forecasting and algorithmic trading, I found it both challenging and rewarding. Indeed, I enjoyed the project so much that I plan on continuing to develop my algorithm and trading strategies in my free time. To this end, I will add XGBoost and LSTM to see if either approach improves the accuracy of the Bitcoin price predictions. I will also continue to tune Prophet models to improve the accuracy of both short-term and long-term forecasts. After that, my goal is to plug in my algorithm to a sandbox account on an existing exchange (e.g., GDAX) to trade at a higher frequency using live-streaming order-book data. 
 
+<p>
+<table>
+  <tr>
+    <td><img src="https://cloud.githubusercontent.com/assets/16638757/25635416/e4ff9054-2f32-11e7-97fb-073f1bf9d643.png"
+           width="160"></td>
+    <td>Erik Hawkins is a data scientist and entrepreneur living in the Bay Area<br>
+    <a href=""><br>
+    GA Profile <a href="https://www.profiles.generalassemb.ly/profiles/erik-hawkins"><br>
+    LinkedIn <a href="https://www.linkedin.com/in/erikehawkins/"><br>
+    Website <a href="https://www.myhungrymind.com"></td>
+  </tr>
+</table>
 
 
 

@@ -1,7 +1,9 @@
 # Algorithmic_Bitcoin_Trading
 Capstone Project, DSI-5 SF
 
-[INSERT PHOTO]
+<p align="center">
+<img src="https://cloud.githubusercontent.com/assets/16638757/25631175/73bd3c4c-2f24-11e7-9415-2f7a1b774197.png" width="400">
+</p>
 
 ## Bitcoin: An Introduction 
 At bottom, Bitcoin is a “[digital asset](https://www.techopedia.com/definition/23367/digital-asset).” Specifically, it is a “virtual currency” that uses cryptography for security. For this reason, you may hear Bitcoin referred to as "[cryptocurrency](http://www.investopedia.com/terms/c/cryptocurrency.asp).” Compared to traditional “fiat” currency that is controlled by a central authority (i.e., government), Bitcoin’s peer-to-peer system provides for [virtually untraceable](https://bitcoinmagazine.com/articles/how-bitcoin-users-reclaim-their-privacy-through-its-anonymous-sibling-monero-1472761633/) and untaxable transactions. 
@@ -55,7 +57,9 @@ The correlation between these Bitcoin market features and the price of Bitcoin c
 
 ##### Figure 2. Bitcoin Market Data Correlation
 
-[INSERT HEATMAP]
+<p align="center">
+<img src="HEATMAP" width="400">
+</p>
 
 After studying Bitcoin market data, next, I explored the predictive power of Bitcoin mining data. Again turning to Quandl, I used the features set forth below together with the market features listed above.
 
@@ -74,7 +78,9 @@ The correlation between these Bitcoin market features can be seen the heatmap be
 
 ##### Figure 4. Bitcoin Mining Data Correlation 
 
-[INSERT HEATMAP]
+<p align="center">
+<img src="HEATMAP" width="400">
+</p>
 
 In light of the strong correlation between much of the market data and mining data, it came as no surprise that regularized regression produced a more accurate prediction that ordinary least squares regression.
 
@@ -86,13 +92,17 @@ As you can see by the somewhat parallel lines below, there appears to be a stron
 
 ##### Figure 5. Number of Google Searches for “Bitcoin” and Bitcoin Price Correlation
 
-[INSERT PLOT]
+<p align="center">
+<img src="PLOT" width="400">
+</p>
 
 The correlation between the number of page views for the “Bitcoin” Wikipedia page and the Bitcoin price is significantly weaker. 
 
 ##### Figure 6. Page Views for Wikipedia’s “Bitcoin” Page and Bitcoin Price Correlation
 
-[INSERT PLOT]
+<p align="center">
+<img src="PLOT" width="400">
+</p>
 
 In the end, adding the Wikipedia page view trend to the feature set did not produce more accurate predictions.
 
@@ -100,11 +110,15 @@ Finally, I explored the relationship between daily Twitter activity and the Bitc
 
 ##### Figure 7. Daily Non-Unique Tweets Mentioning “Bitcoin” and Bitcoin Price
 
-[INSERT PLOT]
+<p align="center">
+<img src="PLOT" width="400">
+</p>
 
 ##### Figure 8. Daily Non-Unique Tweets Mentioning “Bitcoin” and Bitcoin Price
 
-[INSERT PLOT]
+<p align="center">
+<img src="PLOT" width="400">
+</p>
 
 As you can see, there is very little difference between the correlation of unique tweets to Bitcoin price and the correlation between non-unique tweets to Bitcoin price. In both cases, the correlation is negligible. Not surprisingly, neither feature added any accuracy to the model’s accuracy.
 
@@ -112,17 +126,23 @@ Finally, I examined whether there was a correlation between the sentiment of twe
 
 ##### Figure 7. Overall Tweet Sentiment and Bitcoin Price
 
-[INSERT PLOT]
+<p align="center">
+<img src="PLOT" width="400">
+</p>
 
 As the plot above demonstrates, there was very little correlation between the overall sentiment of daily tweets and the price of Bitcoin. Next, I analyzed positive tweet sentiment.
 
 ##### Figure 8. Positive Tweet Sentiment and Bitcoin Price
 
-[INSERT PLOT]
+<p align="center">
+<img src="PLOT" width="400">
+</p>
 
 ##### Figure 9. Negative Tweet Sentiment and Bitcoin Price
 
-[INSERT PLOT]
+<p align="center">
+<img src="PLOT" width="400">
+</p>
 
 Ultimately, I found no significant correlation between the volume of tweets and Bitcoin price nor between the sentiment of those tweets and the Bitcoin price. In the end, the Twitter features were not added to the Bitcoin market and mining features discussed above.
 
@@ -135,19 +155,26 @@ account for important holidays, specify changepoints where changes in time serie
 
 #### Figure 10. Prophet Prediction Accuracy Compared to LassoCV from SciKit-Learn
 
-[INSERT PLOTS]
+<p align="center">
+<img src="PLOT" width="400">
+</p>
 
 Using the Bitcoin market and mining features discussed above, I trained five regression models using the SciKit-Learn API. The [R-squared scores](https://en.wikipedia.org/wiki/Coefficient_of_determination) (or the “coefficient of determination”) indicate the proportion of the variance in the Bitcoin price that is predictable from the Bitcoin market and mining data. The R-squared scores returned during model training and evaluation ranged from 0.75 for Random Forests Regression to 0.96 for LassoCV.
 
 ##### Figure 11. R-Squared Scores From Model Training/Evaluation
 
-[INSERT BAR CHART]
+<p align="center">
+<img src="PLOT" width="400">
+</p>
 
 This accuracy carried over to actual backtesting as shown in the plots below. (The closer the dots are to the line, the more accurate the prediction of Bitcoin’s price.)
 
 This accuracy carried over to actual backtesting as shown in the plots below. (The closer the dots are to the line, the more accurate the prediction of Bitcoin’s price.)
 
-[INSERT PLOTS]
+<p align="center">
+<img src="PLOT" width="400">
+<img src="PLOT" width="400">
+</p>
 
 As show in the plots above, the most accurate model throughout backtesting was LassoCV. Thus, during backtesting LassoCV served as the Bitcoin price prediction that is factored into the trading algorithm.
 
@@ -157,7 +184,9 @@ Because I do not have a background in finance or algorithmic trading, I selected
 
 ##### Figure 12. Exponential Moving Averages in Bitcoin Market: Jan. 1, 2016 - April 30, 2017
 
-[INSERT PLOTS]
+<p align="center">
+<img src="PLOT" width="400">
+</p>
 
 As you can see from the plot above, when the short-term EMA (blue) moves below the long-term EMA (green), the yellow line representing Bitcoin’s price also drops. This indicates a sell opportunity. The opposite is also true. When the short-term EMA move above the long-term EMA, the yellow line representing Bitcoin’s price rises. With this simple strategy in place, I now had a trigger for buy and sell opportunities. 
 
@@ -169,7 +198,11 @@ Market volume also informs this quantity decision. The rationale is simple: a pr
 
 ##### Figure 13. Bitcoin Exchange Trade Volume
 
-[INSERT PLOTS]
+
+<p align="center">
+<img src="PLOT" width="400">
+<img src="PLOT" width="400">
+</p>
 
 In sum, the final trading algorithm works like so: if there is an EMA crossover, buy 10% to 100% of the user’s maximum trade -- an arbitrary number set by the user during backtesting -- based on 1) the degree of EMA crossover, and 2) [market volume](http://www.investopedia.com/articles/technical/02/010702.asp) compared to the average market volume for the past week and month.
 
@@ -183,13 +216,17 @@ At the end of the backtesting, a scorecard is printed to the screen, and several
 
 ##### Figure 14. Sample Scorecard
 
-[INSERT IMAGE]
+<p align="center">
+<img src="IMAGE" width="400">
+</p>
 
 The figure below displays the points at which Bitcoins were purchased throughout backtesting. It affords the user an easy check on whether the algorithm is “buying low and selling high.”
 
 ##### Figure 15. Buy and Sell Orders and Bitcoin Price
 
-[INSERT PLOT]
+<p align="center">
+<img src="PLOT" width="400">
+</p>
 
 ## Conclusions and Next Steps
 

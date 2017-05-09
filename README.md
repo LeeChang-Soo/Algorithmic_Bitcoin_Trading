@@ -47,13 +47,13 @@ In an attempt to find data that may serve as reliable predictors of Bitcoin’s 
 | Total Bitcoin Transactions                         | Total volume of bitcoin transactions                               |
 | Total Transactions Less the Most Popular Addresses | Total number of unique bitcoin Txs/day excluding top 100 pop addrs | 
 | Transactions Per Block                             | The average number of transactions per block                       |
-| Average Transaction Confirmation Time              | Daily median time take for Txs to be accepted into a block         |
+| Average Transaction Confirmation Time              | Daily median time for Txs to be accepted into a block              |
 | Total Transaction Fees BTC                         | The total value of transaction fees miners earn per day in BTC     |
 | Total Transaction Fees USD                         | Total Tx fees miners earn per day in $USD                          |
 | Cost Per Transaction                               | Miners revenue divided by the number of transactions               |
-| Cost as Percent Volume                             | Miners revenue as as percentage of the transaction volume          |
+| Cost as Percent Volume                             | Miners revenue as percentage of the transaction volume          |
 
-The correlation between these Bitcoin market features and the price of Bitcoin can be seen the heatmap below.
+The correlation between these Bitcoin market features and the price of Bitcoin can be seen in the heatmap below.
 
 ##### Figure 2. Bitcoin Market Data Correlation
 
@@ -74,7 +74,7 @@ After studying Bitcoin market data, next, I explored the predictive power of Bit
 | Miners Revenue                                     | (Bitcions mined per day + TX fees) * Bitcoin market price          |
 | Difficulty                                         | How difficult it is to find a hash below a given target            |
 
-The correlation between these Bitcoin market features can be seen the heatmap below:
+The correlation between these Bitcoin market features can be seen in the heatmap below:
 
 ##### Figure 4. Bitcoin Mining Data Correlation 
 
@@ -83,7 +83,7 @@ The correlation between these Bitcoin market features can be seen the heatmap be
 width="600">
 </p>
 
-In light of the strong correlation between much of the market data and mining data, it came as no surprise that regularized regression produced a more accurate prediction that ordinary least squares regression.
+In light of the strong correlation between much of the market data and mining data, it came as no surprise that regularized regression produced a more accurate prediction than ordinary least squares regression.
 
 ### Feature Selection: Non-Market Data
 
@@ -159,7 +159,7 @@ Ultimately, I found no significant correlation between the volume of tweets and 
 In selecting a model or ensemble of models to use in predicting the price of Bitcoin, I first turned to Facebook’s latest creation, [Prophet](https://facebookincubator.github.io/prophet/static/prophet_paper_20170113.pdf). Prophet is a time-series forecasting module, that, according to Facebook, “has been a key piece to improving Facebook’s ability to create a large number of trustworthy forecasts used for decision-making and product features.”
 
 At its core, Prophet ostensibly provides a number of benefits beyond simple linear regression including options to model weekly and yearly seasonality (e.g., school vs. vacation schedules), 
-account for important holidays, specify changepoints where changes in time series are expected (e.g., new product launch), and more. Further, Prophet can handle “a reasonable number” of missing values and large outliers, as well as nonlinear growth curves in which a trends hits a natural limit or saturates. Although Prophet looks promising, I was unable to tune the Prophet model to predict with better accuracy than the regression models available from SciKit-Learn.
+account for important holidays, specify changepoints where changes in time series are expected (e.g., new product launch), and more. Further, Prophet can handle “a reasonable number” of missing values and large outliers, as well as nonlinear growth curves in which a trend hits a natural limit or saturates. Although Prophet looks promising, I was unable to tune the Prophet model to predict with better accuracy than the regression models available from SciKit-Learn.
 
 #### Figure 10. Prophet Prediction Accuracy Compared to LassoCV from SciKit-Learn
 <p align="center">Prophet<br> 
@@ -195,7 +195,7 @@ width="500"></p>
 <img src="https://cloud.githubusercontent.com/assets/16638757/25632097/3fd4ac6e-2f27-11e7-88f1-57a432e175f2.png"
 width="500"></p>
 
-As show in the plots above, the most accurate model throughout backtesting was LassoCV. Thus, during backtesting LassoCV served as the Bitcoin price prediction that is factored into the trading algorithm.
+As shown in the plots above, the most accurate model throughout backtesting was LassoCV. Thus, during backtesting, LassoCV served as the Bitcoin price prediction that is factored into the trading algorithm.
 
 ### Step Two: Develop a Trading Algorithm
 
@@ -208,7 +208,7 @@ Because I do not have a background in finance or algorithmic trading, I selected
 width="760">
 </p>
 
-As you can see from the plot above, when the short-term EMA (blue) moves below the long-term EMA (green), the yellow line representing Bitcoin’s price also drops. This indicates a sell opportunity. The opposite is also true. When the short-term EMA move above the long-term EMA, the yellow line representing Bitcoin’s price rises. With this simple strategy in place, I now had a trigger for buy and sell opportunities. 
+As you can see from the plot above, when the short-term EMA (blue) moves below the long-term EMA (green), the yellow line representing Bitcoin’s price also drops. This indicates a sell opportunity. The opposite is also true. When the short-term EMA moves above the long-term EMA, the yellow line representing Bitcoin’s price rises. With this simple strategy in place, I now had a trigger for buy and sell opportunities. 
 
 Next, I sought to incorporate the predicted price of Bitcoin into the algorithm. Again, to keep things simple, I decided to buy only if both the short-term EMA is higher than the long-term EMA and the predicted price of Bitcoin at the closing bell is higher than the predicted price for the previous day. Accordingly, I sell only if both the short-term EMA is lower than the long-term EMA, and the predicted price of Bitcoin is lower than the previous day’s prediction.
 
@@ -229,9 +229,9 @@ In sum, the final trading algorithm works like so: if there is an EMA crossover,
 
 When researching how to best backtest my algorithm, I found a number of options for backtesting stock trading strategies such as [Quantopian](https://www.quantopian.com/posts/new-feature-comprehensive-backtest-analysis) and [PyAlgoTrade](https://pypi.python.org/pypi/PyAlgoTrade). However, I could not find a suitable option for backtesting Bitcoin trading strategies against historic Bitcoin prices. For this reason, I created a simple function to backtest my algorithm.
 
-Aptly named “ema_backtest,” the function I created permits the user to set the duration for the EMA short and long windows, the backtest start date, the size of the portfolio in Bitcoins and $USD at the start of trading, whether to trade on margin, the maximum trade (e.g., 10 Bitcoins), and whether to print verbose output for subsequent analysis. After the user’s preferences are entered, the backtesting module, trains several regression models on historic Bitcoin data starting in 2013 up to the day before backtesting. Each iteration in the function’s main loop represents a day of trading, and for each day, the algorithm must decide to buy, sell, or hold. Predictive models are re-trained each day thereby adding an additional row of data to the training data as each day passes in an effort to increase prediction accuracy. The user’s portfolio is updated after every trade, and transactions fees are deducted in accordance the fees on the largest Bitcoin exchange, [GDAX](https://www.gdax.com/).
+Aptly named “ema_backtest,” the function I created permits the user to set the duration for the EMA short and long windows, the backtest start date, the size of the portfolio in Bitcoins and $USD at the start of trading, whether to trade on margin, the maximum trade (e.g., 10 Bitcoins), and whether to print verbose output for subsequent analysis. After the user’s preferences are entered, the backtesting module trains several regression models on historic Bitcoin data starting in 2013 up to the day before backtesting. Each iteration in the function’s main loop represents a day of trading, and for each day, the algorithm must decide to buy, sell, or hold. Predictive models are re-trained each day thereby adding an additional row of data to the training data as each day passes in an effort to increase prediction accuracy. The user’s portfolio is updated after every trade, and transactions fees are deducted in accordance with the fees on the largest Bitcoin exchange, [GDAX](https://www.gdax.com/).
 
-At the end of the backtesting, a scorecard is printed to the screen, and several DataFrames are returned for subsequent analysis and display. On average, the results generated from backtesting my algorithm have been exponentially better than simple buy-and-hold investing. Giving myself massive starting capital, and free reign to trade on margin produced returns more than 40 times better than buy-and-hold, and slightly more realistic starting values produced return 10 times greater than buy-and-hold. If starting with $10,000 USD and 1 Bitcoin, far more realistic values for most novice traders, the results were more than 3.5 times better than buy-and-hold investing.
+At the end of the backtesting, a scorecard is printed to the screen, and several DataFrames are returned for subsequent analysis and display. On average, the results generated from backtesting my algorithm have been exponentially better than simple buy-and-hold investing. Giving myself massive starting capital, and free reign to trade on margin produced returns more than 40 times better than buy-and-hold, and slightly more realistic starting values produced returns 10 times greater than buy-and-hold. If starting with $10,000 USD and 1 Bitcoin, far more realistic values for most novice traders, the results were more than 3.5 times better than buy-and-hold investing.
 
 ##### Figure 14. Sample Scorecard
 
